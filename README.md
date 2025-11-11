@@ -97,7 +97,7 @@ print(response.json())
 ---
 
 ## Пункт 7 — Результат
-- **GitHub:** [вставь ссылку после загрузки]
+- **GitHub:** https://github.com/NayaPetu/lab3
 - **Архив:** `document-lab3.zip`
 - **СУБД:** PostgreSQL
 - **Дамп:** `dump.sql`
