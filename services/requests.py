@@ -10,7 +10,7 @@ from models.tables import (
     dtype, dstatus, role, department
 )
 
-# === ПУНКТ 6: Основные процессы предметной области ===
+# === Основные процессы предметной области ===
 
 def get_all_documents():
     """1. Получить все документы"""
