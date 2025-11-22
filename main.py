@@ -15,7 +15,7 @@ from services.requests import (
 
 app = FastAPI(
     title="Система электронного документооборота",
-    description="Лабораторная работа №4",
+    description="Петурова Надежда Игоревна",
     version="2.0"
 )
 
