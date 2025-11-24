@@ -1,104 +1,3 @@
-# from sqlmodel import Session
-# from db import engine
-# from models.tables import dtype, dstatus, role, department, employee, document, documentflow, approval
-# from datetime import datetime
-
-
-# with Session(engine) as session:
-#     # -----------------------
-#     # Роли
-#     # -----------------------
-#     roles = ["автор", "согласующий", "утверждающий", "исполнитель", "администратор", "архивариус"]
-#     role_objs = []
-#     for r in roles:
-#         obj = role(name=r)
-#         session.add(obj)
-#         role_objs.append(obj)
-#     session.commit()
-
-#     # -----------------------
-#     # Статусы документов
-#     # -----------------------
-#     statuses = ["в работе", "на согласовании", "утверждён", "на доработке", "архивирован", "уничтожен"]
-#     status_objs = []
-#     for s in statuses:
-#         obj = dstatus(name=s)
-#         session.add(obj)
-#         status_objs.append(obj)
-#     session.commit()
-
-#     # -----------------------
-#     # Типы документов
-#     # -----------------------
-#     doc_types = [("Приказ", "Приказ по организации"), ("Договор", "Договор с контрагентом")]
-#     type_objs = []
-#     for name, desc in doc_types:
-#         obj = dtype(name=name, description=desc)
-#         session.add(obj)
-#         type_objs.append(obj)
-#     session.commit()
-
-#     # -----------------------
-#     # Подразделения
-#     # -----------------------
-#     dep1 = department(name="Отдел кадров")
-#     dep2 = department(name="Бухгалтерия")
-#     session.add(dep1)
-#     session.add(dep2)
-#     session.commit()
-
-#     # -----------------------
-#     # Сотрудники
-#     # -----------------------
-#     emp1 = employee(fullname="Иван Иванов", roleid=role_objs[0].id, departmentid=dep1.id, contactinfo="ivan@mail.com")
-#     emp2 = employee(fullname="Мария Петрова", roleid=role_objs[1].id, departmentid=dep2.id, contactinfo="maria@mail.com")
-#     session.add(emp1)
-#     session.add(emp2)
-#     session.commit()
-
-#     # -----------------------
-#     # Документы
-#     # -----------------------
-#     doc1 = document(
-#         number="001/23",
-#         createdat=datetime(2025,10,6,12,0),
-#         typeid=type_objs[0].id,
-#         statusid=status_objs[0].id,
-#         authorid=emp1.id,
-#         storageperiod=365
-#     )
-#     doc2 = document(
-#         number="002/23",
-#         createdat=datetime(2025,10,5,9,30),
-#         typeid=type_objs[1].id,
-#         statusid=status_objs[1].id,
-#         authorid=emp2.id,
-#         storageperiod=730
-#     )
-#     session.add(doc1)
-#     session.add(doc2)
-#     session.commit()
-
-#     # -----------------------
-#     # Движение документов
-#     # -----------------------
-#     flow1 = documentflow(documentid=doc1.id, senderid=emp1.id, receiverid=emp2.id, sentat=datetime(2025,10,6,13,0), status="Отправлено")
-#     flow2 = documentflow(documentid=doc2.id, senderid=emp2.id, receiverid=emp1.id, sentat=datetime(2025,10,5,10,0), status="На согласовании")
-#     session.add(flow1)
-#     session.add(flow2)
-#     session.commit()
-
-#     # -----------------------
-#     # Согласования
-#     # -----------------------
-#     approval1 = approval(documentid=doc1.id, employeeid=emp2.id, approvaldate=datetime(2025,10,6,15,0), comment="Согласовано")
-#     approval2 = approval(documentid=doc2.id, employeeid=emp1.id, approvaldate=datetime(2025,10,5,12,0), comment="Нужно доработать")
-#     session.add(approval1)
-#     session.add(approval2)
-#     session.commit()
-
-# print("База данных успешно заполнена минимальными данными!")
-
 import sys
 from pathlib import Path
 
@@ -110,11 +9,29 @@ from db import engine
 from models.tables import dtype, dstatus, role, department, employee, document, documentflow, approval
 from datetime import datetime
 
+# def clear_database():
+#     """Очистка всех таблиц в правильном порядке (с учетом внешних ключей)"""
+#     with Session(engine) as session:
+#         # Удаляем данные в правильном порядке для избежания нарушений внешних ключей
+#         session.exec(text("DELETE FROM Peturova.approval"))
+#         session.exec(text("DELETE FROM Peturova.documentflow"))
+#         session.exec(text("DELETE FROM Peturova.document"))
+#         session.exec(text("DELETE FROM Peturova.employee"))
+#         session.exec(text("DELETE FROM Peturova.department"))
+#         session.exec(text("DELETE FROM Peturova.dstatus"))
+#         session.exec(text("DELETE FROM Peturova.dtype"))
+#         session.exec(text("DELETE FROM Peturova.role"))
+#         session.commit()
+#     print("База данных очищена")
+
+# def populate_database():
+#     """Заполнение базы данных красивыми тестовыми данными""" 
 
 with Session(engine) as session:
     # -----------------------
     # Роли
     # -----------------------
+    print("Создаем роли...")
     roles = ["автор", "согласующий", "утверждающий", "исполнитель", "администратор", "архивариус"]
     role_objs = [role(name=r) for r in roles]
     session.add_all(role_objs)
@@ -235,3 +152,4 @@ with Session(engine) as session:
     session.commit()
 
 print("База данных успешно заполнена минимальными данными!")
+

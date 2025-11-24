@@ -13,7 +13,7 @@ from services.requests import (
     get_department_head
 )
 
-print("=== Проверка пункта 6 ===")
+
 
 # 1. Все документы
 print("\n1. Все документы:")
