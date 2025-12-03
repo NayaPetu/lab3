@@ -19,7 +19,7 @@ def get_all_documents():
 
 
 def get_documents_by_author(author_id: int):
-    """2. Документы конкретного автора"""
+    """Документы конкретного автора"""
     with Session(engine) as session:
         return session.exec(
             select(document).where(document.author_id == author_id)
@@ -27,7 +27,7 @@ def get_documents_by_author(author_id: int):
 
 
 def get_document_history(doc_id: int):
-    """3. История движения документа"""
+    """История движения документа"""
     with Session(engine) as session:
         return session.exec(
             select(documentflow)

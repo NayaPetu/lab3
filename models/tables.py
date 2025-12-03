@@ -71,4 +71,4 @@ class approval(Base, table=True):
     employee_id: int = Field(foreign_key=f"{SCHEMA}.employee.id", alias="employee_id")
     approval_date: Optional[datetime] = Field(default=None, alias="approval_date")
     comment: Optional[str] = Field(default=None, alias="comment")
-    result: Optional[str] = Field(default=None, alias="result")
+    # result: Optional[str] = Field(default=None, alias="result")
