@@ -1,4 +1,3 @@
-# Лабораторная работа №4 — FastAPI + SQLModel
 ## Система электронного документооборота
 
 **Студент:** Петурова Надежда Игоревна  
@@ -34,11 +33,10 @@ lab3/
 ├── models/
 │   └── tables.py          # Модели: Role, DStatus, DType, Department, Employee, Document, DocumentFlow, Approval
 ├── scripts/
-│   └── populate_db.py     # Очистка + заполнение минимальными данными
+│   └── populate_db.py     # заполнение минимальными данными
 ├── services/
 │   └── requests.py        # 7 бизнес-процессов (FastAPI + SQLModel)
 ├── main.py                # FastAPI приложение
-├── test_requests.py       # Проверка бизнес-логики (requests)
 ├── dump.sql               # Дамп базы (PostgreSQL)
 └── README.md              # Этот файл
 
@@ -62,7 +60,7 @@ uvicorn main:app --reload
 
 ---
 
-## Пункт 6 — Реализованные процессы предметной области
+## Реализованные процессы предметной области
 
 №,Описание,Метод,Путь
 1,Главная страница,GET,/
@@ -84,34 +82,13 @@ uvicorn main:app --reload
 17,Все статусы документов,GET,/statuses
 18,Все типы документов,GET,/document-types
 
----
-
-## Тестирование (пример из `test_requests.py`)
-import requests
-
-# Все документы
-response = requests.get("http://127.0.0.1:8000/documents/")
-print(response.json())
-
-# Документы автора
-response = requests.get("http://127.0.0.1:8000/documents/author/1")
-print(response.json())
 
 ---
 
-## Результаты тестирования
-- Все 7 процессов работают корректно
-- Данные из `dump.sql` успешно загружаются
-- Swagger UI доступен по адресу: /docs
-
----
-
-## Пункт 7 — Результат
+##Результат
 - **GitHub:** https://github.com/NayaPetu/lab3
-- **Архив:** `document-lab3.zip`
 - **СУБД:** PostgreSQL
 - **Дамп:** `dump.sql`
 
 ---
 
-**Лабораторная работа 3 выполнена полностью.**
